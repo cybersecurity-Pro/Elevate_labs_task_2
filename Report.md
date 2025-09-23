@@ -71,7 +71,7 @@ PayPal Security Team</p>
 ## Email Header Analysis — Sample 1 (PayPal impersonation)
 
 **Headers used:**
-
+```
 Return-Path: <bounce@paypal-secure-test.test>
 Received: from mail.malicious-hosting.test (unknown [185.234.123.45])
 	by mx.yourmailprovider.test (Postfix) with ESMTPS id 12345ABCDEF
@@ -93,7 +93,7 @@ Authentication-Results: mx.yourmailprovider.test;
 Received-SPF: fail (mx.yourmailprovider.test: domain of paypal-secure-test.test does not designate 185.234.123.45 as permitted sender) client-ip=185.234.123.45; envelope-from=paypal-secure-test.test
 X-Mailer: PHPMailer 6.5.0
 X-Originating-IP: [185.234.123.45]
-
+```
 
 ---
 
@@ -217,7 +217,7 @@ Content-Transfer-Encoding: base64
 ## Email Header Analysis — Sample 2 (Office 365 / Attachment lure)
 
 **Headers used:**
-
+```
 Return-Path: <mailer@office365-help-test.test>
 Received: from relay.securemailer.test (relay.securemailer.test [203.0.113.77])
 	by mx.yourmailprovider.test (Postfix) with ESMTPS id ZXY987654321
@@ -239,7 +239,7 @@ Authentication-Results: mx.yourmailprovider.test;
 Received-SPF: neutral (mx.yourmailprovider.test: domain of office365-help-test.test does not specify permitted sender hosts) client-ip=203.0.113.77; envelope-from=office365-help-test.test
 X-Mailer: FakeCorpMailer/1.2
 X-Attachment-Id: 12345
-
+```
 
 ---
 
