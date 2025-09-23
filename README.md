@@ -1,4 +1,4 @@
-# Elevat_labs_task_2
+# Elevate_labs_task_2
 
 ## This repository contains the documentation and results for the Phishing email analysis task. Apart from this README file, there are three main components:
 
