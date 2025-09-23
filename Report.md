@@ -1,3 +1,13 @@
+# Introduction
+
+Phishing is a form of cyber attack where malicious actors attempt to trick users into revealing sensitive information such as login credentials, financial data, or personal details by impersonating legitimate organizations. Emails are one of the most common phishing vectors, often leveraging social engineering tactics such as urgency, fear, or deception to manipulate the recipient into taking action.
+
+The purpose of this report is to analyze two sample phishing emails, identify common phishing characteristics, and demonstrate how email headers can be used to detect spoofing and fraudulent activity. This exercise provides practical awareness of phishing tactics and develops the skills needed to recognize and respond to email-based threats.
+
+
+---
+
+
 # Phishing Sample 1 — Payment / Account Verification (Payment Service impersonation)
 
 **Raw email:**
