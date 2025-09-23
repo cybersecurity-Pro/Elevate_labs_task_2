@@ -136,7 +136,7 @@ X-Originating-IP: [185.234.123.45]
 ---
 
 
-Phishing Sample 2 — Office Document / Credential Harvest (Corporate Office 365 impersonation)
+## Phishing Sample 2 — Office Document / Credential Harvest (Corporate Office 365 impersonation)
 
 **Raw email:**
 
@@ -233,8 +233,9 @@ X-Attachment-Id: 12345
 
 ---
 
-**Screenshot:**
+**Screenshots:**
 
+![aq2](./Screenshots/aq2.png)
 
 ![ae2](./Screenshots/ae2.png)
 
