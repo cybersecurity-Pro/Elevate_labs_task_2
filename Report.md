@@ -58,6 +58,84 @@ PayPal Security Team</p>
 ---
 
 
+## Email Header Analysis — Sample 1 (PayPal impersonation)
+
+**Headers used:**
+
+Return-Path: <bounce@paypal-secure-test.test>
+Received: from mail.malicious-hosting.test (unknown [185.234.123.45])
+	by mx.yourmailprovider.test (Postfix) with ESMTPS id 12345ABCDEF
+	for <prabhat.shinde@example.com>; Tue, 23 Sep 2025 09:12:06 +0530 (IST)
+Received: from webmail.local (localhost [127.0.0.1])
+	by mail.malicious-hosting.test (Postfix) with ESMTP id 67890FEDCBA
+	for <prabhat.shinde@example.com>; Tue, 23 Sep 2025 03:12:04 +0000 (UTC)
+From: "Account Security" <security@paypal-secure-test.test>
+To: prabhat.shinde@example.com
+Subject: Immediate Action Required — Verify Your PayPal Account
+Date: Tue, 23 Sep 2025 09:12:05 +0530
+Message-ID: <20250923031205.abc123@mail.malicious-hosting.test>
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Authentication-Results: mx.yourmailprovider.test;
+	spf=fail (sender IP is 185.234.123.45) smtp.mailfrom=paypal-secure-test.test;
+	dkim=none header.d=none;
+	dmarc=none action=none header.from=paypal-secure-test.test
+Received-SPF: fail (mx.yourmailprovider.test: domain of paypal-secure-test.test does not designate 185.234.123.45 as permitted sender) client-ip=185.234.123.45; envelope-from=paypal-secure-test.test
+X-Mailer: PHPMailer 6.5.0
+X-Originating-IP: [185.234.123.45]
+
+
+---
+
+
+## How to find and analyze email headers
+
+### 1) Finding the email headers:
+
+- Open the phishing email in your email client (Gmail, Outlook, Thunderbird, etc.).
+
+- Look for options like “Show Original”, “View Source”, or “View Message Headers”.
+
+- Copy the full header block, which includes all Received: lines, Return-Path, From, To, Message-ID, and any authentication results.
+
+### 2) Analyzing the headers:
+
+- I used Google Admin Toolbox — Messageheader
+  for analysis.
+
+- Paste the copied email header into the input box.
+
+- Click “Analyze the Header Above” to see the parsed results.
+
+**Screenshot:**
+
+![aq1](./Screenshots/aq1.png)
+
+- The tool shows SPF, DKIM, DMARC results, the originating IP, and the mail delivery path, which help identify spoofing or phishing indicators.
+
+**Screenshot:**
+
+![ae1](./Screenshots/ae1.png)
+
+## Analysis:
+
+- SPF: Fail — the sending IP 185.234.123.45 is not authorized by paypal-secure-test.test.
+
+- DKIM: None — message lacks valid cryptographic signature.
+
+- DMARC: None — no alignment with domain policy.
+
+- Return-Path vs From: Return-Path: bounce@paypal-secure-test.test matches From somewhat, but the server is not legitimate → spoofing.
+
+- Originating IP: 185.234.123.45 — not owned by PayPal; hosted on a suspicious/malicious server.
+
+- Message-ID domain: mail.malicious-hosting.test — does not match PayPal.
+
+## Conclusion: SPF/DKIM/DMARC failures plus IP/domain mismatches confirm this is a phishing email.
+
+---
+
+
 Phishing Sample 2 — Office Document / Credential Harvest (Corporate Office 365 impersonation)
 
 **Raw email:**
@@ -121,3 +199,58 @@ Content-Transfer-Encoding: base64
 - Report and quarantine the message.
 
 - If you clicked/opened and enabled macros, disconnect and escalate to incident response.
+
+
+---
+
+
+## Email Header Analysis — Sample 2 (Office 365 / Attachment lure)
+
+**Headers used:**
+
+Return-Path: <mailer@office365-help-test.test>
+Received: from relay.securemailer.test (relay.securemailer.test [203.0.113.77])
+	by mx.yourmailprovider.test (Postfix) with ESMTPS id ZXY987654321
+	for <prabhat.shinde@example.com>; Mon, 22 Sep 2025 16:43:23 +0530 (IST)
+Received: from unknown (localhost [127.0.0.1])
+	by relay.securemailer.test (Postfix) with ESMTP id ABC987ZYX654
+	for <prabhat.shinde@example.com>; Mon, 22 Sep 2025 11:43:20 +0000 (UTC)
+From: "IT Support" <it-support@office365-help-test.test>
+To: prabhat.shinde@example.com
+Subject: New Secure Document Shared With You — Action Required
+Date: Mon, 22 Sep 2025 16:43:21 +0530
+Message-ID: <20250922114321.msg-555@relay.securemailer.test>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_12345_67890"
+Authentication-Results: mx.yourmailprovider.test;
+	spf=neutral (mx.yourmailprovider.test: 203.0.113.77 is not in the SPF record for office365-help-test.test) smtp.mailfrom=office365-help-test.test;
+	dkim=none header.d=none;
+	dmarc=none action=none header.from=office365-help-test.test
+Received-SPF: neutral (mx.yourmailprovider.test: domain of office365-help-test.test does not specify permitted sender hosts) client-ip=203.0.113.77; envelope-from=office365-help-test.test
+X-Mailer: FakeCorpMailer/1.2
+X-Attachment-Id: 12345
+
+
+---
+
+**Screenshot:**
+
+
+![ae2](./Screenshots/ae2.png)
+
+
+## Analysis:
+
+- SPF: Neutral — sending IP 203.0.113.77 not authorized for office365-help-test.test.
+
+- DKIM: None — no signature, message unsigned.
+
+- DMARC: None — no policy enforced.
+
+- Return-Path vs From: Mismatch; mailer@office365-help-test.test points to attacker-controlled domain.
+
+- Originating IP: 203.0.113.77 — suspicious host, not Microsoft.
+
+- Message-ID domain: relay.securemailer.test — unrelated to claimed organization.
+
+## Conclusion: Authentication failures and IP/domain mismatches confirm this is a phishing email attempting credential harvesting via attachment.
