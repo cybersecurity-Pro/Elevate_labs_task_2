@@ -1,34 +1,11 @@
-# 1) Phishing Email no.1:
+# Phishing Email no.1:
 
-Return-Path: <bounce@paypal-secure-test.test>
-Received: from unknown (HELO smtp-out.attacker-host.test) (198.51.100.25)
-	by mx.yourmailprovider.test (Postfix) with ESMTPS id HJKL1234XYZ
-	for <prabhat.shinde@example.com>; Tue, 23 Sep 2025 09:12:06 +0530 (IST)
-Received: from smtp-out.attacker-host.test (localhost [127.0.0.1])
-	by smtp-out.attacker-host.test (Postfix) with ESMTP id OUT1234567
-	for <prabhat.shinde@example.com>; Tue, 23 Sep 2025 03:12:04 +0000 (UTC)
-Received: from compromised-web01.attacker.test (unknown [192.0.2.55])
-	by smtp-out.attacker-host.test (Postfix) with ESMTP id RELAY98765
-	for <prabhat.shinde@example.com>; Tue, 23 Sep 2025 03:11:58 +0000 (UTC)
 From: "Account Security" <security@paypal-secure-test.test>
-Reply-To: phish@attacker.test
 To: prabhat.shinde@example.com
 Subject: Immediate Action Required — Verify Your PayPal Account
 Date: Tue, 23 Sep 2025 09:12:05 +0530
-Message-ID: <20250923031205.abc123@attacker-host.test>
 MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-
-Authentication-Results: mx.yourmailprovider.test;
-	spf=fail (sender IP is 198.51.100.25) smtp.mailfrom=paypal-secure-test.test;
-	dkim=permerror (bad signature) header.d=paypal-secure-test.test;
-	dmarc=fail action=reject header.from=paypal-secure-test.test
-
-Received-SPF: fail (mx.yourmailprovider.test: domain of paypal-secure-test.test does not designate 198.51.100.25 as permitted sender) client-ip=198.51.100.25; envelope-from=paypal-secure-test.test
-X-Originating-IP: [198.51.100.25]
-X-Mailer: PHPMailer 6.4.1
-X-Spam-Status: Yes, score=9.6 required=5.0
-Return-Path: <bounce@paypal-secure-test.test>
+Content-Type: text/html; charset=UTF-8
 
 <html>
 <body>
@@ -46,4 +23,42 @@ Return-Path: <bounce@paypal-secure-test.test>
 PayPal Security Team</p>
 </body>
 </html>
+
+
+---
+
+
+# Phishing Email no.2:
+
+From: "IT Support" <it-support@office365-help-test.test>
+To: prabhat.shinde@example.com
+Subject: New Secure Document Shared With You — Action Required
+Date: Mon, 22 Sep 2025 16:43:21 +0530
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_12345_67890"
+
+------=_Part_12345_67890
+Content-Type: text/html; charset=UTF-8
+
+<html>
+<body>
+<p>Hello Prabhat,</p>
+
+<p>Your colleague has shared an important document with you. To view the document, please open the attached file and enable editing.</p>
+
+<p><b>Note:</b> The document is protected. You must sign in with your corporate account to unlock the file.</p>
+
+<p><a href="http://secure-office.test/auth">Open Document</a></p>
+
+<p>Regards,<br/>IT Support</p>
+</body>
+</html>
+
+------=_Part_12345_67890
+Content-Type: application/msword; name="SharedDocument.docm"
+Content-Disposition: attachment; filename="SharedDocument.docm"
+Content-Transfer-Encoding: base64
+
+[BASE64 PAYLOAD REDACTED — do NOT include real malware]
+------=_Part_12345_67890--
 
