@@ -265,3 +265,14 @@ X-Attachment-Id: 12345
 - Message-ID domain: relay.securemailer.test — unrelated to claimed organization.
 
 ## Conclusion: Authentication failures and IP/domain mismatches confirm this is a phishing email attempting credential harvesting via attachment.
+
+
+---
+
+
+# Note on Sample Emails
+
+The phishing emails analyzed in this report are simulated examples created for educational purposes. They were generated with the assistance of ChatGPT and do not originate from real organizations. These samples do not contain actual malicious content and are intended to demonstrate typical phishing tactics and header spoofing safely.
+
+
+---
